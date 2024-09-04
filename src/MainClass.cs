@@ -65,9 +65,6 @@ namespace SuperCold
         // On Game Scene Change, replace material of walls and objects with the following names:
         public override void OnSceneWasInitialized(int buildIndex, string sceneName)
         {
-
-            MelonLogger.Msg($"New Scene Loaded: {sceneName}.");
-
             ProcessObjectsWithName("pb", greyWall);
             ProcessObjectsWithName("prefab", greyWall);
             ProcessObjectsWithName("model", greyWall);
