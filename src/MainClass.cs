@@ -11,6 +11,7 @@ using UnityEngine;
 using SuperhotAssets;
 using System.Collections;
 using static RootMotion.FinalIK.IKSolver;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SuperCold
 {
@@ -70,6 +71,7 @@ namespace SuperCold
             ProcessObjectsWithName("pb", greyWall);
             ProcessObjectsWithName("prefab", greyWall);
             ProcessObjectsWithName("model", greyWall);
+
             ProcessObjectsWithName("Glock", purpleGun);
             ProcessObjectsWithName("glock", purpleGun);
 
@@ -297,6 +299,97 @@ namespace SuperCold
 
             spawnEffectGameObject.transform.Find("FrontSpotZcieniem").GetComponent<Light>().color = Color.blue;
             spawnEffectGameObject.transform.Find("PointLightBezcieniowy").GetComponent<Light>().color = Color.blue;
+        }
+    }
+
+
+    [HarmonyPatch(typeof(TextManager), "DisplaySingleWord", new Type[] {typeof(OverlayWord) })]
+    public static class PatchSuperhotTitle
+    {
+
+        /// <summary>
+        /// Patches the super hot text after ending a level to supercold.
+        /// </summary>
+        /// <param name="__originalMethod"> Method which was called (Used to get class type.) </param>
+        /// <param name="__instance"> Caller of function. </param>
+        /// <param name="word"> Word to be displayed. </param>
+        private static void Prefix(MethodBase __originalMethod, object __instance, ref OverlayWord word)
+        {
+            if (word != null)
+            {
+                if (word.txt.ToLower() == "hot")
+                {
+                    word.txt = "COLD";
+                }
+            }
+            else
+            {
+                MelonLogger.Warning($"Empty Word displayed. Can safely be ignored.");
+            }
+
+            
+        }
+    }
+
+    [HarmonyPatch(typeof(SHGUI), "SetPixelFront", new Type[] {typeof(char), typeof(int), typeof(int), typeof(char) })]
+    public static class PatchCursorBlue
+    {
+        /// <summary>
+        /// Patches the the cursor to be blue on front.
+        /// </summary>
+        /// <param name="__originalMethod"> Method which was called (Used to get class type.) </param>
+        /// <param name="__instance"> Caller of function. </param>
+        /// <param name="C"> Character </param>
+        /// <param name="x"> X Postion </param>
+        /// <param name="y"> Y Position </param>
+        /// <param name="col"> Color </param>
+        private static void Prefix(MethodBase __originalMethod, object __instance, ref char C, ref int x, ref int y, ref char col)
+        {
+            if (col == 'r')
+            {
+                col = 'b';
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(SHGUI), "SetPixelBack", new Type[] { typeof(char), typeof(int), typeof(int), typeof(char) })]
+    public static class PatchSelectGUIBlue
+    {
+        /// <summary>
+        /// Patches the the cursor to be blue on back.
+        /// </summary>
+        /// <param name="__originalMethod"> Method which was called (Used to get class type.) </param>
+        /// <param name="__instance"> Caller of function. </param>
+        /// <param name="C"> Character </param>
+        /// <param name="x"> X Postion </param>
+        /// <param name="y"> Y Position </param>
+        /// <param name="col"> Color </param>
+        private static void Prefix(MethodBase __originalMethod, object __instance, ref char C, ref int x, ref int y, ref char col)
+        {
+            if (col == 'r')
+            {
+                col = 'b';
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(SHGUI), "SetColorFront", new Type[] { typeof(char), typeof(int), typeof(int)})]
+    public static class PatchCursorBlue2
+    {
+        /// <summary>
+        /// Patches set color.
+        /// </summary>
+        /// <param name="__originalMethod"> Method which was called (Used to get class type.) </param>
+        /// <param name="__instance"> Caller of function. </param>
+        /// <param name="c"> Color </param>
+        /// <param name="x"> X Postion </param>
+        /// <param name="y"> Y Position </param>
+        private static void Prefix(MethodBase __originalMethod, object __instance, ref char c, ref int x, ref int y)
+        {
+            if (c == 'r')
+            {
+                c = 'b';
+            }
         }
     }
 }
