@@ -1,6 +1,6 @@
 ﻿# Superhot Cold Mod
 
-A small mod for Superhot which converts the color sceme to a blue version.
+A small mod for Superhot which converts the color scheme to a blue version.
 
 
 # How to Install:
