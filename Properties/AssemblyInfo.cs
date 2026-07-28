@@ -1,20 +1,17 @@
 ﻿using MelonLoader;
-using System;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-
 using SuperCold;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("SuperCold")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Mod for converting the color scheme to blue.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("SuperCold")]
-[assembly: AssemblyCopyright("Copyright ©  2024")]
+[assembly: AssemblyCopyright("Copyright © 2026")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -33,10 +30,10 @@ using SuperCold;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.0.1.0")]
+[assembly: AssemblyFileVersion("1.0.1.0")]
 
-[assembly: MelonInfo(typeof(MainClass), "SuperCold", "1.0.0", "Gasterbuzzer", "https://github.com/Gasterbuzzer/SuperCold/releases/")]
+[assembly: MelonInfo(typeof(MainClass), "SuperCold", "1.0.1", "Gasterbuzzer", "https://github.com/Gasterbuzzer/SuperCold/releases/")]
 [assembly: MelonGame("SUPERHOT_Team", "SUPERHOT")]
-[assembly: MelonAuthorColor(ConsoleColor.Magenta)]
-[assembly: MelonPriority(100)]
+[assembly: MelonAuthorColor(255, 255, 0, 255)]
+[assembly: MelonPriority(99)]
